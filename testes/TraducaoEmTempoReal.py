@@ -70,25 +70,51 @@ try:
         # OCR
         results = reader.readtext(processed_img)
 
+        # laco passando pelo texto e traduzindo por partes por conta
+        # de bugs na hr de traducao de textos longos
         extracted_text = " ".join([res[1] for res in results])
 
-        if extracted_text.strip() != "":
-            # Detecta idioma
-            detected_language = detect(extracted_text)
+        if results:
 
-            # Tradução
-            if is_complex_language(detected_language):
-                translated = translator.translate(
-                    extracted_text, src=detected_language, dest="en"
-                ).text
-                translated = translator.translate(translated, src="en", dest="pt").text
-            else:
-                translated = translator.translate(
-                    extracted_text, src=detected_language, dest="pt"
-                ).text
+            # Lista para armazenar cada trecho traduzido
+            translated_parts = []
+
+            # Detecta idioma
+            for res in results:
+                text_part = res[1].strip()
+                if text_part == "":
+                    continue
+                try:
+                    detected_language = detect(text_part)
+
+                    # Tradução por partes
+                    if is_complex_language(detected_language):
+                        temp = translator.translate(
+                            text_part, src=detected_language, dest="en"
+                        ).text
+                        # linha para debug
+                        # print("Texto em ingles:" + temp)
+                        translated_text = translator.translate(
+                            temp, src="en", dest="pt"
+                        ).text
+                    else:
+                        translated_text = translator.translate(
+                            text_part, src=detected_language, dest="pt"
+                        ).text
+
+                    translated_parts.append(translated_text)
+                except Exception as e:
+                    print(f"Erro ao traduzir trecho '{text_part}': {e}")
+                    translated_parts.append(text_part)  # mantém original se erro
+
+            # Junta todas as partes traduzidas
+            full_translated_text = " ".join(translated_parts)
+
+            # Junta todas as partes extraídas para referência
+            extracted_text = " ".join([res[1] for res in results])
 
             print("Texto Detectado:", extracted_text)
-            print("Traduzido:", translated)
+            print("Traduzido:", full_translated_text)
             print("---------------------------------------------------")
 
         # Sleep para dar tempo do OCR processar e não sobrecarregar a CPU
