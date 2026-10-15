@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Ambientes virtuais
+venv/
+.venv/
+env/
+ENV/
+
+# Variáveis de ambiente
+.env
+.env.*
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+
+# Arquivos temporários
+*.log
+*.tmp
+*.bak
+.pytest_cache/
+
+# Imagens e logs gerados
+Data/screenshots/
+Data/logs/
+
+# Build e executáveis
+build/
+dist/
+*.exe
+
+# Modelos de IA baixados
+*.pth
+*.pt
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
