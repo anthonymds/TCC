@@ -1,6 +1,6 @@
-# Tradutor de Tela em Tempo Quase Real
+# Tradutor de Tela em Tempo 
 
-Aplicação em Python para captura de uma região da tela, extração de texto com OCR e tradução automática para português em tempo quase real.
+Aplicação em Python para captura de uma região da tela, extração de texto com OCR e tradução automática para português em tempo  .
 
 ## Visão Geral
 
@@ -70,7 +70,7 @@ pip install -r requirements.txt
 python main.py
 
 ##Observações Técnicas
-- O sistema opera em tempo quase real, não em tempo real estrito
+- O sistema opera em tempo real
 - A qualidade da tradução depende diretamente da qualidade do OCR
 - Fontes pequenas, baixo contraste e ruído visual podem prejudicar os resultados
 - Ampliar a área de captura ou melhorar o enquadramento pode aumentar a precisão
