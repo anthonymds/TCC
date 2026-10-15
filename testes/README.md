@@ -1,4 +1,4 @@
-# Tradutor de Tela em Tempo 
+# Tradutor de Tela em Tempo Real
 
 Aplicação em Python para captura de uma região da tela, extração de texto com OCR e tradução automática para português em tempo  .
 
